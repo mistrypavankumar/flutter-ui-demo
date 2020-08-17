@@ -38,6 +38,7 @@ class MyHomeScreen extends StatelessWidget {
         elevation: 0.0,
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: 4,
@@ -65,7 +66,7 @@ class MyHomeScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 12,
                     ),
                     Container(
                       child: Text(
@@ -106,26 +107,29 @@ class MyHomeScreen extends StatelessWidget {
                       ],
                     ),
                     Spacer(),
-                    Wrap(
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            FloatingActionButton(
-                              onPressed: () {},
-                              child: Icon(Icons.shopping_cart),
-                              backgroundColor: greenColor,
-                            ),
-                            Spacer(),
-                            Container(
-                              width: 380,
-                              child: Image.asset(
-                                'assets/images/potted_plant.png',
-                                fit: BoxFit.cover,
+                        FloatingActionButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => DetailsScreen(),
                               ),
-                            ),
-                          ],
+                            );
+                          },
+                          child: Icon(Icons.shopping_cart),
+                          backgroundColor: greenColor,
+                        ),
+                        Container(
+                          child: Image.asset(
+                            'assets/images/potted_plant.png',
+                            fit: BoxFit.cover,
+                            height: 350,
+                            width: 200,
+                          ),
                         ),
                       ],
                     ),
@@ -138,10 +142,329 @@ class MyHomeScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Container(),
+            flex: 1,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 38.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 16.0,
+                  ),
+                  Text(
+                    "Planting",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Spacer(),
+                  Row(
+                    children: [
+                      Container(
+                        height: 100,
+                        width: MediaQuery.of(context).size.width / 2 - 40,
+                        decoration: BoxDecoration(
+                          color: darkGreenColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "250 ",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "ml",
+                                  style: TextStyle(
+                                    color: Colors.white54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              "water",
+                              style: TextStyle(
+                                color: Colors.white54,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Spacer(),
+                      Container(
+                        height: 100,
+                        width: MediaQuery.of(context).size.width / 2 - 40,
+                        decoration: BoxDecoration(
+                          color: darkGreenColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "18 ",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 30,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "c",
+                                  style: TextStyle(
+                                    color: Colors.white54,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Text(
+                              "sunshine",
+                              style: TextStyle(
+                                color: Colors.white54,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),
     );
   }
+}
+
+class DetailsScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: greenColor,
+      appBar: AppBar(
+        leading: GestureDetector(
+          child: Icon(
+            Icons.arrow_back,
+          ),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyHomeScreen()),
+            );
+          },
+        ),
+        backgroundColor: greenColor,
+        elevation: 0.0,
+      ),
+      body: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(32.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "greenery nyc",
+                  style: TextStyle(
+                    color: Colors.white,
+                    letterSpacing: 2,
+                    fontSize: 22.0,
+                  ),
+                ),
+                SizedBox(
+                  height: 32.0,
+                ),
+                Container(
+                  width: 180,
+                  child: Text(
+                    "Product Overview",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 80),
+                itemsRow(Icons.star, "water", "every 7 days"),
+                SizedBox(height: 8.0),
+                itemsRow(Icons.ac_unit, "Humidity", "up to 82%"),
+                SizedBox(height: 8.0),
+                itemsRow(Icons.straighten, "Size", '38" - 48"tdll'),
+              ],
+            ),
+          ),
+          SizedBox(height: 32.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 48.0),
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                color: darkGreenColor,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  topLeft: Radius.circular(30),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 50,
+                  ),
+                  Text(
+                    "Delivery Information",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          SizedBox(height: 32.0),
+          Padding(
+            padding: const EdgeInsets.only(left: 48.0),
+            child: Container(
+              height: 60,
+              decoration: BoxDecoration(
+                color: darkGreenColor,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  topLeft: Radius.circular(30),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      right: 60,
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 50,
+                        ),
+                        Text(
+                          "Return Policy",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Spacer(),
+          Container(
+            height: 90.0,
+            child: Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.white,
+                  ),
+                ),
+                Container(
+                  height: 90.0,
+                  width: MediaQuery.of(context).size.width / 2,
+                  decoration: BoxDecoration(
+                    color: Color(0xff2c2731),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(60),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.add_shopping_cart,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        "add to cart",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+itemsRow(icon, name, time) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Row(
+        children: [
+          Icon(
+            icon,
+            color: Colors.white,
+          ),
+          SizedBox(width: 6.0),
+          Text(
+            name,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+      Text(
+        time,
+        style: TextStyle(
+          color: Colors.white54,
+        ),
+      ),
+    ],
+  );
 }
